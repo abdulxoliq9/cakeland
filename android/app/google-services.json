@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "756618266847",
+    "project_id": "cakeland-5a76d",
+    "storage_bucket": "cakeland-5a76d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756618266847:android:5e43af288a128d4591416a",
+        "android_client_info": {
+          "package_name": "com.example.cakeland"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756618266847-9000bqlcthemapq5u31n8bo1vjg47lp4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAAeAlZ0fTCvHV8iQwSv7X7XKaZQvAR2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756618266847-9000bqlcthemapq5u31n8bo1vjg47lp4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
