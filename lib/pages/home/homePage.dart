@@ -11,7 +11,7 @@ import '../widget/cakeType.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  static final String id = 'home_page';
+  static const String id = 'home_page';
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -63,8 +63,8 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         //leading: Icon(Icons.menu_rounded,color: Colors.red[300],),
         actions: [
-          Padding(padding: EdgeInsets.all(15.0),
-              child: Image.asset('assets/images/cake_logo.png'))
+          Padding(padding: const EdgeInsets.all(15.0),
+              child: ClipOval(child: Image.asset('assets/images/cake_logo.png')))
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
         onTap: navBottom,
         backgroundColor: Colors.red.shade50,
         color: Colors.red.shade200,
-        animationDuration: Duration(milliseconds: 300),
+        animationDuration: const Duration(milliseconds: 300),
         items: [
           Icon(Icons.home_filled,color: _navIndex == 0 ? Colors.redAccent[400] : Colors.red[50],),
           Icon(Icons.settings,color:  _navIndex == 1 ? Colors.redAccent[400] : Colors.red[50],),
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             Text('Choose your cake...',
@@ -90,8 +90,8 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.red[900]),
 
             ),
-            SizedBox(height: 30,),
-            Container(
+            const SizedBox(height: 30,),
+            SizedBox(
                 height: 50,
                 child: ListView.builder(itemCount: cakeType.length,
                     scrollDirection: Axis.horizontal,
@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
             Text('The best offers for you!',style:
               GoogleFonts.satisfy(color: Colors.red.shade900,
               fontWeight: FontWeight.bold,fontSize: 25,wordSpacing: 5),),
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
           ],
         ),
       ),
@@ -136,8 +136,9 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text('user.name!'),
-                accountEmail: Text(user.email!),
+                accountName:  Text('User of CakeLand',
+                style: GoogleFonts.ubuntu(fontSize: 20),),
+                accountEmail: Text(user.email!,style: GoogleFonts.ubuntu(),),
                 currentAccountPicture: CircleAvatar(
                   child: ClipOval(
                     child: Image.asset('assets/images/cake_logo.png',
@@ -156,32 +157,32 @@ class _HomePageState extends State<HomePage> {
               ),
 
               ListTile(
-                leading: Icon(Icons.home_filled,color: Colors.red,),
-                title: Text('HOME'),
+                leading: const Icon(Icons.home_filled,color: Colors.red,),
+                title: const Text('HOME'),
                 textColor: Colors.red,
                 onTap: (){
                   Navigator.pushReplacementNamed(context, HomePage.id);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.settings,color: Colors.red,),
-                title: Text('SETTINGS'),
+                leading: const Icon(Icons.settings,color: Colors.red,),
+                title: const Text('SETTINGS'),
                 textColor: Colors.red,
                 onTap: (){
                   Navigator.pushReplacementNamed(context, SettingPage.id);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.shopping_bag,color: Colors.red,),
-                title: Text('BASKET'),
+                leading: const Icon(Icons.shopping_bag,color: Colors.red,),
+                title: const Text('BASKET'),
                 textColor: Colors.red,
                 onTap: (){
                   Navigator.pushReplacementNamed(context, BasketPage.id);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.output_outlined,color: Colors.red,),
-                title: Text('LOGOUT'),
+                leading: const Icon(Icons.output_outlined,color: Colors.red,),
+                title: const Text('LOGOUT'),
                 textColor: Colors.red,
                 onTap: (){
                   FirebaseAuth.instance.signOut();

@@ -1,12 +1,14 @@
+
 import 'package:cakeland/auth/main_page.dart';
 import 'package:cakeland/sign/signIn.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
-  static final String id = 'signUp';
+  static const String id = 'signUp';
   @override
   State<SignUp> createState() => _SignUpState();
 }
@@ -16,24 +18,42 @@ class _SignUpState extends State<SignUp> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
 
   @override
   void dispose(){
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
     super.dispose();
   }
 
-  Future signUp()async{
+  Future signUp(context)async{
     if(passwordConfirmed()){
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(), 
           password: _passwordController.text.trim());
       Navigator.pushReplacementNamed(context, MainPage.id);
 
+      addUserDetail(
+        _firstNameController.text.trim(),
+        _lastNameController.text.trim(),
+        _emailController.text.trim(),
+      );
     }
   }
+
+  Future addUserDetail(String firstName,String lastName,String email)async{
+    await FirebaseFirestore.instance.collection('users').add({
+      'first name':firstName,
+      'last name':lastName,
+      'email':email,
+    });
+  }
+
   bool passwordConfirmed(){
     if(_passwordController.text.trim() ==
         _confirmPasswordController.text.trim()){
@@ -55,20 +75,58 @@ class _SignUpState extends State<SignUp> {
             children: [
               Center(child: Container(
                   height: 150,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                   ),
-                  child: ClipOval(
-                      child: const Image(image: AssetImage('assets/images/cake_logo.png'),
+                  child: const ClipOval(
+                      child: Image(image: AssetImage('assets/images/cake_logo.png'),
                       )))),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
                 Text('Cake Land',style: GoogleFonts.
                    kolkerBrush(fontSize: 70,
                     color: Colors.red.shade800,
                      fontWeight: FontWeight.bold),),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.white)
+                ),
+                child: TextField(
+                  controller: _firstNameController,
+                  decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'First Name',
+                      hintStyle: TextStyle(
+                          color: Colors.grey
+                      )
+                  ),
+                ),
+              ),
+              const SizedBox(height: 15,),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.white)
+                ),
+                child: TextField(
+                  controller: _lastNameController,
+                  decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Last Name',
+                      hintStyle: TextStyle(
+                          color: Colors.grey
+                      )
+                  ),
+                ),
+              ),
+              const SizedBox(height: 15,),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 decoration: BoxDecoration(
                     color: Colors.grey.shade100,
                     borderRadius: BorderRadius.circular(12),
@@ -76,7 +134,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 child: TextField(
                   controller: _emailController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Email',
                       hintStyle: TextStyle(
@@ -85,9 +143,9 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
               ),
-              SizedBox(height: 15,),
+              const SizedBox(height: 15,),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 decoration: BoxDecoration(
                     color: Colors.grey.shade100,
                     borderRadius: BorderRadius.circular(12),
@@ -96,7 +154,7 @@ class _SignUpState extends State<SignUp> {
                 child: TextField(
                   controller: _passwordController,
                   //obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Password',
                       hintStyle: TextStyle(
@@ -104,9 +162,9 @@ class _SignUpState extends State<SignUp> {
                       )
                   ),
                 ),
-              ),SizedBox(height: 15,),
+              ),const SizedBox(height: 15,),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 decoration: BoxDecoration(
                     color: Colors.grey.shade100,
                     borderRadius: BorderRadius.circular(12),
@@ -115,7 +173,7 @@ class _SignUpState extends State<SignUp> {
                 child: TextField(
                   controller: _confirmPasswordController,
                   //obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Confirm Password',
                       hintStyle: TextStyle(
@@ -123,7 +181,7 @@ class _SignUpState extends State<SignUp> {
                       )
                   ),
                 ),
-              ),SizedBox(height: 15,),
+              ),const SizedBox(height: 15,),
               Container(
                 height: 50,
                 width: MediaQuery.of(context).size.width,
@@ -133,7 +191,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 child: GestureDetector(
                   onTap: (){
-                    signUp();
+                    signUp(context);
                   },
                   child: Center(
                     child: Text('Sign Up',
@@ -145,7 +203,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
               ),
-              SizedBox(height: 15,),
+              const SizedBox(height: 15,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 //crossAxisAlignment: CrossAxisAlignment.center,
@@ -155,7 +213,7 @@ class _SignUpState extends State<SignUp> {
                       fontWeight: FontWeight.bold,
                       color: Colors.grey
                   ),),
-                  SizedBox(width: 10,),
+                  const SizedBox(width: 10,),
                   GestureDetector(
                     onTap: (){
                       Navigator.pushReplacementNamed(context, SignIn.id);

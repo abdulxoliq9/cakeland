@@ -18,6 +18,9 @@ class _BasketPageState extends State<BasketPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green.shade400,
+      ),
       backgroundColor: Colors.green.shade50,
       body:  Center(
         child:  FlatButton(

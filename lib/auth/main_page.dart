@@ -2,7 +2,6 @@ import 'package:cakeland/sign/signIn.dart';
 import 'package:cakeland/pages/home/homePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:toast/toast.dart';
 
 import 'auth_page.dart';
 

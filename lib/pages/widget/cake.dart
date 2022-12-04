@@ -52,7 +52,7 @@ class Cake_tile extends StatelessWidget {
                 children: [
                   Text('\$$cakePrice',style:
                   TextStyle(color: Colors.red),),
-                  Icon(Icons.add_box,color: Colors.red,)
+                  Icon(Icons.add_circle_outlined,color: Colors.red,)
                 ],
               ),
             )

@@ -1,3 +1,8 @@
+import 'package:cakeland/pages/cakePage/CookiePage/cookiePage.dart';
+import 'package:cakeland/pages/cakePage/DonutPage/donutPage.dart';
+import 'package:cakeland/pages/cakePage/FruitlyPage/fruitlyPage.dart';
+import 'package:cakeland/pages/cakePage/PiePage/piePage.dart';
+import 'package:cakeland/pages/cakePage/SweetPage/sweetPage.dart';
 import 'package:cakeland/sign/forgtotPWpage.dart';
 import 'package:cakeland/sign/signIn.dart';
 import 'package:cakeland/sign/signUp.dart';
@@ -24,13 +29,18 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: MainPage(),
         routes: {
-        HomePage.id: (context) => HomePage(),
-        BasketPage.id: (context) => BasketPage(),
-        SettingPage.id: (context) => SettingPage(),
-        SignUp.id: (context) => SignUp(),
-        SignIn.id: (context) => SignIn(),
-        MainPage.id: (context) => MainPage(),
-          ForgotPasswordPage.id: (context) => ForgotPasswordPage(),
+        HomePage.id: (context) => const HomePage(),
+        BasketPage.id: (context) => const BasketPage(),
+        SettingPage.id: (context) => const SettingPage(),
+        SignUp.id: (context) => const SignUp(),
+        SignIn.id: (context) => const SignIn(),
+        MainPage.id: (context) => const MainPage(),
+        ForgotPasswordPage.id: (context) => const ForgotPasswordPage(),
+        CookieCakePage.id: (context) => const CookieCakePage(),
+        DonutCakePage.id: (context) => const DonutCakePage(),
+        FruitlyCakePage.id: (context) => const FruitlyCakePage(),
+        PieCakePage.id: (context) => const PieCakePage(),
+        SweetCakePage.id: (context) => const SweetCakePage(),
         },
 
       theme: ThemeData(brightness: Brightness.light,
